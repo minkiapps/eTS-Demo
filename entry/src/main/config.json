@@ -1,0 +1,77 @@
+{
+  "app": {
+    "bundleName": "com.minkiapps.etssample",
+    "vendor": "minkiapps",
+    "version": {
+      "code": 1000000,
+      "name": "1.0.0"
+    }
+  },
+  "deviceConfig": {},
+  "module": {
+    "package": "com.minkiapps.etssample",
+    "name": ".MyApplication",
+    "mainAbility": "com.minkiapps.etssample.MainAbility",
+    "deviceType": [
+      "phone",
+      "tablet"
+    ],
+    "distro": {
+      "deliveryWithInstall": true,
+      "moduleName": "entry",
+      "moduleType": "entry",
+      "installationFree": false
+    },
+    "abilities": [
+      {
+        "metaData": {
+          "customizeData": [
+            {
+              "name": "hwc-theme",
+              "value": "androidhwext:style/Theme.Emui.Light.NoTitleBar"
+            }
+          ]
+        },
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ],
+        "visible": true,
+        "name": "com.minkiapps.etssample.MainAbility",
+        "icon": "$media:icon",
+        "description": "$string:mainability_description",
+        "label": "$string:entry_MainAbility",
+        "type": "page",
+        "launchType": "standard"
+      }
+    ],
+    "js": [
+      {
+        "mode": {
+          "syntax": "ets",
+          "type": "pageAbility"
+        },
+        "pages": [
+          "pages/index",
+          "pages/datasample"
+        ],
+        "name": "default",
+        "window": {
+          "designWidth": 720,
+          "autoDesignWidth": false
+        }
+      }
+    ],
+    "reqPermissions": [
+      {
+        "name": "ohos.permission.INTERNET"
+      }
+    ]
+  }
+}
