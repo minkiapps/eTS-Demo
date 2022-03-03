@@ -59,7 +59,8 @@
         },
         "pages": [
           "pages/index",
-          "pages/datasample"
+          "pages/syntaxsample",
+          "pages/detailpage"
         ],
         "name": "default",
         "window": {

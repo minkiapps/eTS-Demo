@@ -2,6 +2,7 @@
 import fetch from '@system.fetch';
 import router from '@system.router'
 import dayjs from 'dayjs'
+import resourceManager from '@ohos.resourceManager';
 
 interface Joke {
   value: string;
@@ -20,15 +21,14 @@ struct Index {
 
   build() {
     Column() {
-      JokeView()
-      JokeRating()
+      JokeLayout()
       Blank()
 
-      Button('Goto to another page')
-        .margin({ bottom: 8 })
-        .onClick((event: ClickEvent) => {
-          router.push({ uri: 'pages/datasample' })
-        })
+      //Button('Goto to another page')
+      //  .margin({ bottom: 8 })
+      //  .onClick((event: ClickEvent) => {
+      //    router.push({ uri: 'pages/syntaxsample' })
+      //  })
       DayFooter()
     }
     .width('100%')
@@ -38,15 +38,42 @@ struct Index {
 }
 
 @Component
-struct JokeView {
-  @State jokeText: string = 'Joke goes here'
-
+struct JokeLayout {
   build() {
     Column() {
-      Text('Check Norris Jokes')
+      JokeHeader()
+      JokeView()
+      JokeRating()
+    }
+  }
+}
+
+@Component
+struct JokeHeader {
+  build() {
+    Column() {
+      Text($r('app.string.chuck_norris_jokes'))
         .fontSize(30)
         .margin({ top: 16 })
         .fontWeight(FontWeight.Bold)
+
+      Navigator({ target: 'pages/detailpage', type: NavigationType.Push }) {
+        Image($rawfile('chucknorris.jpg'))
+          .size({width : 100, height : 100})
+          .border({ width: 2, color: Color.Black, radius: 50 })
+          .sharedTransition("chuck_norris")
+      }.margin({top : 16})
+    }
+  }
+}
+
+@Component
+struct JokeView {
+
+  @State jokeText: string = 'Jokes comes here'
+
+  build() {
+    Column() {
 
       Text(this.jokeText)
         .fontSize(24)
@@ -56,7 +83,7 @@ struct JokeView {
         .padding({ left: 16, right: 16 })
         .margin({ top: 16 })
 
-      Button('Reload Joke')
+      Button($r('app.string.chuck_norris_reload_joke'))
         .margin({ top: 16 })
         .onClick((event: ClickEvent) => {
           this.jokeText = 'Loading...'
