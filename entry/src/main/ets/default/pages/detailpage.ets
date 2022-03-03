@@ -1,3 +1,6 @@
+import {AppStorage} from '../storage/appstorage.ets'
+import featureAbility from '@ohos.ability.featureAbility'
+
 @Entry
 @Component
 struct Detailpage {
@@ -30,14 +33,19 @@ struct Detailpage {
 
 @Component
 struct Bar {
+
+  storage : AppStorage = new AppStorage()
+
   @State like: boolean = false
   @State likeSize: number = 24
 
+  async aboutToAppear() {
+    this.like = await this.storage.getIsLiked()
+    console.log('Bar appeared in async function, Like Status: ' + this.like)
+  }
+
   build() {
     Stack({ alignContent: Alignment.End }) {
-      Rect({ width: 80, height: 50 })
-        .radius(16)
-        .margin({ right : 4 })
       Row() {
         Image($rawfile('share.svg'))
           .size({ width: 24, height: 24 })
@@ -48,6 +56,7 @@ struct Bar {
             .size({ width: this.likeSize, height: this.likeSize })
             .onClick((clickEvent) => {
               this.like = !this.like
+              this.storage.setLike(this.like)
               animateTo({
                 duration: 300,
                 curve: Curve.EaseInOut,
@@ -63,6 +72,9 @@ struct Bar {
       }
       .margin({ right: 16 })
       .height(36)
+      .padding({left : 16, right : 16})
+      .backgroundColor('#333333')
+      .borderRadius(8)
     }.width('100%')
   }
 }

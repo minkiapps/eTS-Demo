@@ -21,6 +21,10 @@
       "value": "Reload Joke"
     },
     {
+      "name": "loading_text",
+      "value": "Loading..."
+    },
+    {
       "name": "chuck_norris_name",
       "value": "Chuck Norris"
     },
